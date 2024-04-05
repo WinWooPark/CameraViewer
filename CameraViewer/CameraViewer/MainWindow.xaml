@@ -1,0 +1,18 @@
+﻿<Window
+    x:Class="CameraViewer.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MainFrame="clr-namespace:CameraViewer.UI.MainFrame"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CameraViewer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="1920"
+    Height="1080"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid Background="Black">
+        <MainFrame:MainFrame />
+    </Grid>
+</Window>
