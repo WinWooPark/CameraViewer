@@ -11,6 +11,8 @@ namespace CameraViewer.UI.MainFrame
             CameraState = Brushes.Red;
             LightState = Brushes.Red;
             MotionState = Brushes.Red;
+
+            RunMode = "Manual";
         }
 
         private SolidColorBrush _cameraState;
@@ -57,6 +59,16 @@ namespace CameraViewer.UI.MainFrame
             }
         }
 
+        string _runMode;
+        public string RunMode 
+        {
+            get { return _runMode; }
+            set 
+            {
+                _runMode = value;
+                OnPropertyChanged(nameof(_runMode));
+            }
+        }
 
         public void CreateCommand() 
         {

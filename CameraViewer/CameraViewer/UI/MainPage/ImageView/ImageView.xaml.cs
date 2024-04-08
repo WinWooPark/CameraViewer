@@ -13,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CameraViewer.UI.MainPage
+namespace CameraViewer.UI.MainPage.ImageView
 {
     /// <summary>
-    /// MainPage.xaml에 대한 상호 작용 논리
+    /// ImageView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainPage : UserControl
+    public partial class ImageView : UserControl
     {
-        MainPageViewModel _mainPageViewModel;
-        public MainPage()
+        public ImageView()
         {
-            _mainPageViewModel = new MainPageViewModel();
             InitializeComponent();
-
-            DataContext = _mainPageViewModel;
         }
     }
 }
