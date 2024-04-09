@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CameraViewer.Utile.Define
+namespace CameraViewer.UI.SetUpPage
 {
-    public static class CommonDefine
+    public class SetUpPageViewModel
     {
-        
     }
 }

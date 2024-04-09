@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CameraViewer", "CameraViewer\CameraViewer.csproj", "{AD541E99-45B2-4DD5-A094-138B81ED3338}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageWatch", "..\..\7. ImageWatch\ImageWatch\ImageWatch\ImageWatch.csproj", "{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,14 @@ Global
 		{AD541E99-45B2-4DD5-A094-138B81ED3338}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD541E99-45B2-4DD5-A094-138B81ED3338}.Release|x64.ActiveCfg = Release|x64
 		{AD541E99-45B2-4DD5-A094-138B81ED3338}.Release|x64.Build.0 = Release|x64
+		{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}.Debug|x64.ActiveCfg = Debug|x64
+		{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}.Debug|x64.Build.0 = Debug|x64
+		{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}.Release|x64.ActiveCfg = Release|x64
+		{ED84AD6C-CC60-47E0-BE36-413B84D94DCD}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
