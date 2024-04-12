@@ -41,6 +41,9 @@ namespace ImageWatch.Behaviors
 
         private void AssociatedObject_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
+            _imageWatchViewModel = AssociatedObject.DataContext as ImageWatchViewModel;
+            _mainSystem = _imageWatchViewModel.MainSystem;
+
             _mainSystem.ImageScaleChange(e.Delta);
         }
 

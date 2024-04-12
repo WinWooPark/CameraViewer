@@ -6,19 +6,18 @@ using System.Windows.Media.Imaging;
 
 namespace ImageWatch.ViewModel
 {
-    internal class ImageWatchViewModel : ObservableObject
+    public class ImageWatchViewModel : ObservableObject
     {
         private MainSystem _mainSystem = null;
         public MainSystem MainSystem 
         {
             get { return _mainSystem;}
+            set { _mainSystem = value; }
         }
 
-        public ImageWatchViewModel(MainSystem mainSystem)
+        public ImageWatchViewModel(MainSystem MainSystem)
         {
-            _mainSystem = mainSystem;
-            _mainSystem.ImageWatchViewModel = this;
-
+            _mainSystem = MainSystem;
             _drawEllipse = new ObservableCollection<DrawEllipse>();
             _drawLine = new ObservableCollection<DrawLine>();
             _drawRect = new ObservableCollection<DrawRect>();
@@ -105,6 +104,58 @@ namespace ImageWatch.ViewModel
                     OnPropertyChanged(nameof(TranslationY));
                     DeleteResult();
                     UpdateResult();
+                }
+            }
+        }
+
+        public double ImageWidth
+        {
+            get { return _mainSystem.ImageControlWidth; }
+            set
+            {
+                if (_mainSystem.ImageControlWidth != value)
+                {
+                    _mainSystem.ImageControlWidth = value;
+                    OnPropertyChanged(nameof(ImageWidth));
+                }
+            }
+        }
+
+        public double ImageHeight
+        {
+            get { return _mainSystem.ImageControlHeight; }
+            set
+            {
+                if (_mainSystem.ImageControlHeight != value)
+                {
+                    _mainSystem.ImageControlHeight = value;
+                    OnPropertyChanged(nameof(ImageHeight));
+                }
+            }
+        }
+
+        public double CanvasWidth
+        {
+            get { return _mainSystem.ImageControlWidth; }
+            set
+            {
+                if (_mainSystem.CanvasControlWidth != value)
+                {
+                    _mainSystem.CanvasControlWidth = value;
+                    OnPropertyChanged(nameof(CanvasWidth));
+                }
+            }
+        }
+
+        public double CanvasHeight
+        {
+            get { return _mainSystem.CanvasControlHeight; }
+            set
+            {
+                if (_mainSystem.CanvasControlHeight != value)
+                {
+                    _mainSystem.CanvasControlHeight = value;
+                    OnPropertyChanged(nameof(CanvasHeight));
                 }
             }
         }

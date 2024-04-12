@@ -6,10 +6,16 @@ namespace ImageWatch
     public class ImageWatchAPI
     {
         MainSystem _mainSystem;
+        ImageWatch _imageWatch;
+        public ImageWatch ImageWatch 
+        {
+            get { return _imageWatch; }
+        }
 
         public ImageWatchAPI()
         {
-            //MainSystem _mainSystem = new MainSystem();
+            _imageWatch = new ImageWatch();
+            _mainSystem = ImageWatch.MainSystem;
         }
 
         public void InitImageView(int ImageWidth, int ImageHeight) 

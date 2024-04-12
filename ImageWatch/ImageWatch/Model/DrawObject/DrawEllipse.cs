@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace ImageWatch.Model.DrawObject
 {
-    internal class DrawEllipse
+    public class DrawEllipse
     {
         public DrawEllipse(){}
 

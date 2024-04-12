@@ -24,8 +24,8 @@
                     Source="{Binding MainImage, UpdateSourceTrigger=PropertyChanged}"
                     Stretch="Uniform">
                     <b:Interaction.Behaviors>
-                        <behaviors:ImageSizeBehavior />
-                        <behaviors:MouseEventBehavior />
+                        <behaviors:ImageSizeBehavior/>
+                        <behaviors:MouseEventBehavior/>
                     </b:Interaction.Behaviors>
 
                     <Image.RenderTransform>
@@ -41,7 +41,7 @@
                         <ItemsPanelTemplate>
                             <Canvas>
                                 <b:Interaction.Behaviors>
-                                    <behaviors:CanvasSizeBehavior />
+                                    <behaviors:CanvasSizeBehavior CanvasWidth="{Binding Source=}"/>
                                 </b:Interaction.Behaviors>
                             </Canvas>
                         </ItemsPanelTemplate>

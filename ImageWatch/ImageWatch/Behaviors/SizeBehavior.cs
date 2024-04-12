@@ -6,16 +6,23 @@ using ImageWatch.ViewModel;
 
 namespace ImageWatch.Behaviors
 {
-    internal class ImageSizeBehavior : Behavior<Image>
+    public class ImageSizeBehavior : Behavior<Image>
     {
-        MainSystem _mainSystem;
-        ImageWatchViewModel _imageWatchViewModel;
+        public static readonly DependencyProperty CanvasWidthProperty = DependencyProperty.Register("ImageWidth", typeof(double), typeof(CanvasSizeBehavior), new PropertyMetadata(0.0));
 
-        public ImageSizeBehavior()
+        public static readonly DependencyProperty CanvasHeightProperty = DependencyProperty.Register("ImageHeight", typeof(double), typeof(CanvasSizeBehavior), new PropertyMetadata(0.0));
+
+        public double ImageWidth
         {
-           
+            get { return (double)GetValue(CanvasWidthProperty); }
+            set { SetValue(CanvasWidthProperty, value); }
         }
 
+        public double ImageHeight
+        {
+            get { return (double)GetValue(CanvasHeightProperty); }
+            set { SetValue(CanvasHeightProperty, value); }
+        }
         protected override void OnAttached()
         {
             AssociatedObject.SizeChanged += OnSizeChanged;
@@ -31,22 +38,27 @@ namespace ImageWatch.Behaviors
             double Width = AssociatedObject.ActualWidth;
             double Height = AssociatedObject.ActualHeight;
 
-            Image image = sender as Image;
-            _imageWatchViewModel = image.DataContext as ImageWatchViewModel;
-            _mainSystem = _imageWatchViewModel.MainSystem;
-
-            _mainSystem.GetImageControlSize(Width, Height);
+            ImageWidth = AssociatedObject.ActualWidth;
+            ImageHeight = AssociatedObject.ActualHeight;
         }
     }
 
     public class CanvasSizeBehavior : Behavior<Canvas>
     {
-        MainSystem _mainSystem;
-        ImageWatchViewModel _imageWatchViewModel;
+        public static readonly DependencyProperty CanvasWidthProperty = DependencyProperty.Register("CanvasWidth", typeof(double), typeof(CanvasSizeBehavior), new PropertyMetadata(0.0));
 
-        public CanvasSizeBehavior()
+        public static readonly DependencyProperty CanvasHeightProperty = DependencyProperty.Register("CanvasHeight", typeof(double), typeof(CanvasSizeBehavior), new PropertyMetadata(0.0));
+
+        public double CanvasWidth
         {
-           
+            get { return (double)GetValue(CanvasWidthProperty); }
+            set { SetValue(CanvasWidthProperty, value); }
+        }
+
+        public double CanvasHeight
+        {
+            get { return (double)GetValue(CanvasHeightProperty); }
+            set { SetValue(CanvasHeightProperty, value); }
         }
 
         protected override void OnAttached()
@@ -64,11 +76,8 @@ namespace ImageWatch.Behaviors
             double Width = AssociatedObject.ActualWidth;
             double Height = AssociatedObject.ActualHeight;
 
-            Canvas canvas = sender as Canvas;
-            _imageWatchViewModel = canvas.DataContext as ImageWatchViewModel;
-            _mainSystem = _imageWatchViewModel.MainSystem;
-
-            _mainSystem.GetCanvasControlSize(Width, Height);
+            CanvasWidth = Width;
+            CanvasHeight = Height;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ImageWatch.Model.DrawObject
 {
-    internal class DrawObject
+    public class DrawObject
     {
         public DrawObject()
         {

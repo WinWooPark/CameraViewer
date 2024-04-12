@@ -5,16 +5,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Media.Media3D;
+using ImageWatch.ViewModel;
 
 namespace ImageWatch.ManagementSystem
 {
-    internal class MainSystem : MainSystemData
+    public class MainSystem : MainSystemData
     {
         public MainSystem()
         {
             _coordinateTransformations = new CoordinateTransformations();
         }
 
+  
         CoordinateTransformations _coordinateTransformations;
 
         public void GetImageControlSize(double Width, double Height)

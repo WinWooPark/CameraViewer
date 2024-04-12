@@ -8,7 +8,7 @@ namespace ImageWatch.ManagementSystem
     //여기 안에서 이미지 Zoom Pan Roi 그리기 다 한다.
     //외부에서는 이미지와 ROI 좌표들만 보내준다.
 
-    internal class MainSystemData
+    public class MainSystemData
     {
         public MainSystemData() 
         {
