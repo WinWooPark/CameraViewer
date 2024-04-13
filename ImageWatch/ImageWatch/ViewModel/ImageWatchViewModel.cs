@@ -51,6 +51,17 @@ namespace ImageWatch.ViewModel
                 }
             }
         }
+        int _delta;
+        public int Delta
+        {
+            get { return _delta; }
+            set
+            {
+                _delta = value;
+                OnPropertyChanged(nameof(Delta));
+                _mainSystem.ImageScaleChange(_delta);
+            }
+        }
 
         public double CenterPointX
         {
@@ -78,18 +89,37 @@ namespace ImageWatch.ViewModel
             }
         }
 
+        double _mouseMoveX;
+        public double MouseMoveX 
+        {
+            get { return _mouseMoveX; }
+            set 
+            {
+                _mouseMoveX = value;
+                _mainSystem.ImageTranslationChange(_mouseMoveX, _mouseMoveY);
+            }
+        }
+
+        double _mouseMoveY;
+        public double MouseMoveY
+        {
+            get { return _mouseMoveY; }
+            set
+            {
+                _mouseMoveY = value;
+                _mainSystem.ImageTranslationChange(_mouseMoveX, _mouseMoveY);
+            }
+        }
+
         public double TranslationX
         {
             get { return _mainSystem.TranslationX; }
             set
             {
-                if (_mainSystem.TranslationX != value)
-                {
-                    _mainSystem.TranslationX = value;
-                    OnPropertyChanged(nameof(TranslationX));
-                    DeleteResult();
-                    UpdateResult();
-                }
+                _mainSystem.TranslationX = value;
+                OnPropertyChanged(nameof(TranslationX));
+                DeleteResult();
+                UpdateResult();
             }
         }
 
@@ -98,17 +128,14 @@ namespace ImageWatch.ViewModel
             get { return _mainSystem.TranslationY; }
             set
             {
-                if (_mainSystem.TranslationY != value)
-                {
-                    _mainSystem.TranslationY = value;
-                    OnPropertyChanged(nameof(TranslationY));
-                    DeleteResult();
-                    UpdateResult();
-                }
+                _mainSystem.TranslationY = value;
+                OnPropertyChanged(nameof(TranslationY));
+                DeleteResult();
+                UpdateResult();
             }
         }
 
-        public double ImageWidth
+        public double ImageControlWidth
         {
             get { return _mainSystem.ImageControlWidth; }
             set
@@ -116,12 +143,13 @@ namespace ImageWatch.ViewModel
                 if (_mainSystem.ImageControlWidth != value)
                 {
                     _mainSystem.ImageControlWidth = value;
-                    OnPropertyChanged(nameof(ImageWidth));
+                    OnPropertyChanged(nameof(ImageControlWidth));
+                    _mainSystem.CalRatio();
                 }
             }
         }
 
-        public double ImageHeight
+        public double ImageControlHeight
         {
             get { return _mainSystem.ImageControlHeight; }
             set
@@ -129,7 +157,8 @@ namespace ImageWatch.ViewModel
                 if (_mainSystem.ImageControlHeight != value)
                 {
                     _mainSystem.ImageControlHeight = value;
-                    OnPropertyChanged(nameof(ImageHeight));
+                    OnPropertyChanged(nameof(ImageControlHeight));
+                    _mainSystem.CalRatio();
                 }
             }
         }

@@ -18,11 +18,10 @@
                 <ColumnDefinition Width="960" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Margin="5,5,5,5" x:Name="ImageView1">
-                <ImageWatch:ImageWatch DataContext="{Binding ImageWatchAPI1}"/>
-            </Grid>
-            <Grid Grid.Column="1" Margin="5,5,5,5" x:Name="ImageView2">
-                <ImageWatch:ImageWatch DataContext="{Binding ImageWatchAPI2}"/>
+            <Grid Grid.Column="0" x:Name="MaingImageView"/>
+            
+            <Grid Grid.Column="1" Margin="5,5,5,5">
+                <ImageView:ImageView/>
             </Grid>
 
 

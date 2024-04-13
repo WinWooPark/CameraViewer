@@ -6,7 +6,7 @@
     xmlns:behaviors="clr-namespace:ImageWatch.Behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ImageWatch"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodel="clr-namespace:ImageWatch.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ImageWatchViewModel}"
     d:DesignHeight="1000"
     d:DesignWidth="1000"
     mc:Ignorable="d">
@@ -24,8 +24,8 @@
                     Source="{Binding MainImage, UpdateSourceTrigger=PropertyChanged}"
                     Stretch="Uniform">
                     <b:Interaction.Behaviors>
-                        <behaviors:ImageSizeBehavior/>
-                        <behaviors:MouseEventBehavior/>
+                        <behaviors:ImageSizeBehavior ImageWidth ="{Binding ImageControlWidth , Mode=TwoWay}" ImageHeight ="{Binding ImageControlHeight, Mode=TwoWay}" ImageCenterX="{Binding CenterPointX ,Mode=TwoWay}" ImageCenterY="{Binding CenterPointY, Mode=TwoWay}"/>
+                        <behaviors:MouseEventBehavior MouseMoveX="{Binding MouseMoveX, Mode=TwoWay}" MouseMoveY = "{Binding MouseMoveY, Mode=TwoWay}" MouseWheel="{Binding Delta, Mode=TwoWay}"/>
                     </b:Interaction.Behaviors>
 
                     <Image.RenderTransform>
@@ -41,7 +41,7 @@
                         <ItemsPanelTemplate>
                             <Canvas>
                                 <b:Interaction.Behaviors>
-                                    <behaviors:CanvasSizeBehavior CanvasWidth="{Binding Source=}"/>
+                                    <behaviors:CanvasSizeBehavior CanvasHeight="{Binding CanvasHeight , Mode=TwoWay}" CanvasWidth="{Binding CanvasWidth, Mode=TwoWay}"/>
                                 </b:Interaction.Behaviors>
                             </Canvas>
                         </ItemsPanelTemplate>

@@ -16,29 +16,9 @@ namespace ImageWatch.ManagementSystem
             _coordinateTransformations = new CoordinateTransformations();
         }
 
-  
         CoordinateTransformations _coordinateTransformations;
 
-        public void GetImageControlSize(double Width, double Height)
-        {
-            ImageControlWidth = Width;
-            ImageControlHeight = Height;
-
-            ImageWatchViewModel.CenterPointX = Width / 2;
-            ImageWatchViewModel.CenterPointY = Height / 2;
-
-            CalRatio();
-        }
-
-        public void GetCanvasControlSize(double Width, double Height)
-        {
-            CanvasControlWidth = Width;
-            CanvasControlHeight = Height;
-
-            CalRatio();
-        }
-
-        void CalRatio()
+        public  void CalRatio()
         {
             RatioX = ImageControlWidth / ImageWidth;
             RatioY = ImageControlHeight / ImageHeight;
@@ -77,7 +57,6 @@ namespace ImageWatch.ManagementSystem
             //스케일을 곱해주는 이유는 확대 되었을때 그만큼 더 움직일수 있도록 가중치를 부여 한것이다.
             ImageWatchViewModel.TranslationX += (offsetX * Scale * CommonDefine.MouseSensitivity);
             ImageWatchViewModel.TranslationY += (offsetY * Scale * CommonDefine.MouseSensitivity);
-            
         }
 
         public void AddDrawObjectEllipse(double X, double Y, double Width, double Height, bool Judge)

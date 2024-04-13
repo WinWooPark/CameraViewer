@@ -13,13 +13,63 @@ namespace ImageWatch.Behaviors
         System.Windows.Point _startPoint;
         System.Windows.Point _currentPoint;
         bool _isMouseMove;
-        MainSystem _mainSystem;
-        ImageWatchViewModel _imageWatchViewModel;
+
+        static  MouseEventBehavior()
+        {
+            MouseMoveXProperty = DependencyProperty.RegisterAttached("MouseMoveX", typeof(double), typeof(MouseEventBehavior), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
+            MouseMoveYProperty = DependencyProperty.RegisterAttached("MouseMoveY", typeof(double), typeof(MouseEventBehavior), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
+            MouseWheelProperty = DependencyProperty.RegisterAttached("MouseWheel", typeof(double), typeof(MouseEventBehavior), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
+        }
+
+        public static readonly DependencyProperty MouseMoveXProperty;
+
+
+        public static readonly DependencyProperty MouseMoveYProperty;
+
+
+        public static readonly DependencyProperty MouseWheelProperty;
+           
+
+        public double MouseMoveX
+        {
+            get
+            {
+                return (double)base.GetValue(MouseMoveXProperty);
+            }
+            set
+            {
+                base.SetValue(MouseMoveXProperty, value);
+            }
+        }
+
+        public double MouseMoveY
+        {
+            get
+            {
+                return (double)base.GetValue(MouseMoveYProperty);
+            }
+            set
+            {
+                base.SetValue(MouseMoveYProperty, value);
+            }
+        }
+
+        public double MouseWheel
+        {
+            get
+            {
+                return (double)base.GetValue(MouseWheelProperty);
+            }
+            set
+            {
+                base.SetValue(MouseWheelProperty, value);
+            }
+        }
+
 
         public MouseEventBehavior()
         {
             _isMouseMove = false;
-            
         }
 
         protected override void OnAttached()
@@ -41,10 +91,7 @@ namespace ImageWatch.Behaviors
 
         private void AssociatedObject_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            _imageWatchViewModel = AssociatedObject.DataContext as ImageWatchViewModel;
-            _mainSystem = _imageWatchViewModel.MainSystem;
-
-            _mainSystem.ImageScaleChange(e.Delta);
+            MouseWheel = e.Delta;
         }
 
         private void AssociatedObject_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
@@ -53,13 +100,11 @@ namespace ImageWatch.Behaviors
             {
                 _currentPoint = e.GetPosition(e.OriginalSource as IInputElement);
 
-                double offsetX = CommonDefine.MouseSensitivity * (_currentPoint.X - _startPoint.X);
-                double offsetY = CommonDefine.MouseSensitivity * (_currentPoint.Y - _startPoint.Y);
-
-                _imageWatchViewModel = AssociatedObject.DataContext as ImageWatchViewModel;
-                _mainSystem = _imageWatchViewModel.MainSystem;
-
-                _mainSystem.ImageTranslationChange(offsetX, offsetY);
+                double offsetX = (_currentPoint.X - _startPoint.X);
+                double offsetY = (_currentPoint.Y - _startPoint.Y);
+                
+                MouseMoveX = offsetX;
+                MouseMoveY = offsetY;
 
                 _startPoint = _currentPoint;
             }

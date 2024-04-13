@@ -10,14 +10,15 @@ namespace CameraViewer.UI.MainPage
     public partial class MainPage : UserControl
     {
         MainPageViewModel _mainPageViewModel;
-        ImageWatchAPI _imageWatchAPI1;
-        ImageWatchAPI _imageWatchAPI2;
+
         public MainPage()
         {
             _mainPageViewModel = new MainPageViewModel();
             InitializeComponent();
 
             DataContext = _mainPageViewModel;
+
+            MaingImageView.Children.Add(_mainPageViewModel.MainIamgeView.ImageWatch);
         }
     }
 }
