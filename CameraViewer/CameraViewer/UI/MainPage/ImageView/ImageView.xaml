@@ -61,31 +61,37 @@
             <Button
                 Grid.Row="0"
                 Grid.Column="0"
+                Command="{Binding ImageFit}"
                 Content="Image Fit"
                 Style="{StaticResource ImageViewButtom}" />
             <Button
                 Grid.Row="0"
                 Grid.Column="1"
+                Command="{Binding ImageLoad}"
                 Content="Image Load"
                 Style="{StaticResource ImageViewButtom}" />
             <Button
                 Grid.Row="0"
                 Grid.Column="2"
+                Command="{Binding ImageSave}"
                 Content="Image Save"
                 Style="{StaticResource ImageViewButtom}" />
             <Button
                 Grid.Row="1"
                 Grid.Column="0"
+                Command="{Binding CameraLive}"
                 Content="Live"
                 Style="{StaticResource ImageViewButtom}" />
             <Button
                 Grid.Row="1"
                 Grid.Column="1"
+                Command="{Binding CameraStop}"
                 Content="Stop"
                 Style="{StaticResource ImageViewButtom}" />
             <Button
                 Grid.Row="1"
                 Grid.Column="2"
+                Command="{Binding CameraGrab}"
                 Content="Grab"
                 Style="{StaticResource ImageViewButtom}" />
         </Grid>

@@ -51,6 +51,7 @@ namespace ImageWatch.ViewModel
                 }
             }
         }
+        
         int _delta;
         public int Delta
         {

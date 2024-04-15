@@ -1,26 +1,22 @@
-﻿using ImageWatch;
-using OpenCvSharp;
+﻿using CameraViewer.ManagementSystem;
+using ImageWatch;
+using CameraViewer.Utile.Define;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CameraViewer.UI.MainPage
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : ObservableObject
     {
+        MainSystem _mainSystem;
+        IntegratedClass _integratedClass;
+       
 
-        public ImageWatchAPI MainIamgeView { get; set; }
-        public ImageWatchAPI ImageWatchAPI2 { get; set; }
-        
-        public MainPageViewModel()
+        public MainPageViewModel(MainSystem mainSystem)
         {
-            MainIamgeView = new ImageWatchAPI();
-            
-            MainIamgeView.InitImageView(3780,3780);
-            
-            Mat Image1 = Cv2.ImRead("D:\\Project\\CameraViewer\\CameraViewer\\TEST.bmp");
-           
-            MainIamgeView.UpdateUIImage(OpenCvSharp.WpfExtensions.BitmapSourceConverter.ToBitmapSource(Image1));
-            
+            _mainSystem = mainSystem;
+            _mainSystem.MainPage = this;
+
+            _integratedClass = IntegratedClass.Instance;
         }
-
-
     }
 }

@@ -1,13 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Media;
+using CameraViewer.ManagementSystem;
 
 namespace CameraViewer.UI.MainFrame
 {
     public class MainFrameViewModel : ObservableObject
     {
-        public MainFrameViewModel()
+        MainSystem _mainSystem;
+        public MainFrameViewModel(MainSystem mainSystem)
         {
+            _mainSystem = mainSystem;
+            _mainSystem.MainFrame = this;
+
             CameraState = Brushes.Red;
             LightState = Brushes.Red;
             MotionState = Brushes.Red;
@@ -73,6 +78,12 @@ namespace CameraViewer.UI.MainFrame
         public void CreateCommand() 
         {
             //ProgramExit = new RelayCommand();
+        }
+
+        public void HardWareCameraState(bool cameraState) 
+        {
+            if (cameraState) CameraState = Brushes.Green;
+            else CameraState = Brushes.Red;
         }
 
         public void HardWareState(bool cameraState, bool lightState, bool motionState) 

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using CameraViewer.UI.SetUpPage;
+using System.Windows.Controls;
 
 namespace CameraViewer.UI.MainFrame
 {
@@ -8,9 +9,14 @@ namespace CameraViewer.UI.MainFrame
     public partial class MainFrame : UserControl
     {
         MainFrameViewModel _mainFrameViewModel;
+        SetUpPageViewModel _setUpPageViewModel;
+        ImageViewViewModel imageViewViewModel;
+
+        public CurrentViewModel = 
+
         public MainFrame()
         {
-            _mainFrameViewModel = new MainFrameViewModel();
+            _mainFrameViewModel = new MainFrameViewModel(App.MainSystem);
             InitializeComponent();
             DataContext = _mainFrameViewModel;
         }

@@ -12,7 +12,7 @@ namespace CameraViewer.UI.MainPage.ImageView
 
         public ImageView()
         {
-            _imageViewViewModel = new ImageViewViewModel();
+            _imageViewViewModel = new ImageViewViewModel(App.MainSystem);
             InitializeComponent();
             DataContext = _imageViewViewModel;
          

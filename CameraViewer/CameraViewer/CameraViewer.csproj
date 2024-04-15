@@ -23,12 +23,19 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenCvSharp4" Version="4.9.0.20240103" />
     <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.9.0.20240103" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ImageWatch\ImageWatch\ImageWatch.csproj" />
+    <ProjectReference Include="..\Library\BaslerVision\BaslerVision\BaslerVision.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ImageWatch">
+      <HintPath>bin\x64\Debug\net8.0-windows\ImageWatch.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
