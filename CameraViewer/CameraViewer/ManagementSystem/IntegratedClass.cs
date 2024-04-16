@@ -2,6 +2,8 @@
 using BaslerVision;
 using CameraViewer.Utile.Define;
 using ImageWatch;
+using OpenCvSharp;
+using System.Windows.Media.Imaging;
 
 namespace CameraViewer.ManagementSystem
 {
@@ -45,6 +47,7 @@ namespace CameraViewer.ManagementSystem
             get { return _imageWatchAPI; }
         }
 
+        bool _liveMode = false;
         BaslerCamera _baslerCamera;
 
         ConfigData _configData;
@@ -78,12 +81,12 @@ namespace CameraViewer.ManagementSystem
 
         void CreateBaslerCamera() 
         {
-            _baslerCamera = new BaslerCamera();
+            _baslerCamera = new BaslerCamera(OnImageGrabbed);
 
             int ExposureTime = _configData.SystemData.ExposureTime;
             int TimeOut = _configData.SystemData.TimeOut;
 
-            bool bRet = _baslerCamera.CameraOpen(ExposureTime, TimeOut);
+            _baslerCamera.CameraOpen(ExposureTime, TimeOut);
         }
 
         public void ExecuteSoftwareTrigger() 
@@ -91,5 +94,16 @@ namespace CameraViewer.ManagementSystem
             _baslerCamera.ExecuteSoftwareTrigger();
         }
 
+        public void OnImageGrabbed(byte[] buffer, int Height, int Width) 
+        {
+            if (buffer == null || buffer.Length <= 0 || Height < 0 || Width < 0) return;
+
+
+            BitmapSource bitmapSource = ImageConverter.ByteArrayToBitmapSource(buffer, Width, Height, 1);
+            
+            _imageWatchAPI.UpdateUIImage(bitmapSource);
+
+            if (_liveMode) ExecuteSoftwareTrigger();
+        }
     }
 }

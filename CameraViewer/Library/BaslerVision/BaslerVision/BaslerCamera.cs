@@ -8,7 +8,14 @@ namespace BaslerVision
         int _exposureTime;
         int _grabTimeOut;
 
-        public BaslerCamera(){}
+        public BaslerCamera(Action<byte[], int, int> grabCallBack)
+        {
+            _grabCallBack = grabCallBack;
+        }
+
+        Action<byte[], int, int> _grabCallBack;
+
+
 
         public bool CameraOpen(int ExposureTime , int TimeOut) 
         {
@@ -60,8 +67,11 @@ namespace BaslerVision
             {
                 int ImageHeight = grabResult.Height;
                 int ImageWidth= grabResult.Width;
+                PixelType Type = grabResult.PixelTypeValue;
 
                 byte[] buffer = grabResult.PixelData as byte[];
+
+                _grabCallBack(buffer, ImageHeight, ImageWidth);
             }
             else
             {

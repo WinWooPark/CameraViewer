@@ -132,7 +132,6 @@ namespace CameraViewer.UI.MainFrame
             }
         }
 
-
         string _runMode;
         public string RunMode 
         {
