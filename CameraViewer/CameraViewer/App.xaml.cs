@@ -35,6 +35,13 @@ namespace CameraViewer
 
             MainWindow.Show();
         }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            MainSystem.ProgrameExit();
+
+            base.OnExit(e);
+        }
     }
 
 }

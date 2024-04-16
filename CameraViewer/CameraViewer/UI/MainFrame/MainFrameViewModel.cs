@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Windows.Media;
 using CameraViewer.ManagementSystem;
 using CameraViewer.Utile.Define;
+using System.Windows;
 
 namespace CameraViewer.UI.MainFrame
 {
@@ -165,6 +166,15 @@ namespace CameraViewer.UI.MainFrame
 
             if (motionState) MotionState = Brushes.Green;
             else MotionState = Brushes.Red;
+        }
+
+        public void Close() 
+        {
+            MessageBoxResult result = MessageBox.Show("Do you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.No) return;
+
+            App.Current.Shutdown();
         }
     }
 }

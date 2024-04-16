@@ -69,6 +69,14 @@ namespace CameraViewer.ManagementSystem
         {
             _integratedClass.liveMode = false;
         }
+
+        public void ProgrameExit()
+        {
+            if (_integratedClass.liveMode == true) _integratedClass.liveMode = false;
+
+            _integratedClass.ExitIntegratedClass();
+        }
+
     }
 
    

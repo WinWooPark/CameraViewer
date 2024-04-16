@@ -70,6 +70,13 @@ namespace CameraViewer.ManagementSystem
             CreateBaslerCamera();
         }
 
+        public void CloseIntegratedClass()
+        {
+            _baslerCamera.CloseCamera();
+
+            ImageWatchAPI.Close();
+        }
+
         void CreateConfigData() 
         {
             _configData = new ConfigData();

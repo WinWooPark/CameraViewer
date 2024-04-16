@@ -20,32 +20,30 @@ namespace BaslerVision
         public bool CameraOpen(int ExposureTime , int TimeOut) 
         {
             bool bRet = false;
-            try 
+            try
             {
                 _baslerCamera = new Camera(CameraSelectionStrategy.FirstFound);
 
                 if (_baslerCamera == null) return bRet;
 
+                //카메라 모드 설정 "소프트웨어 트리거 모드"
+                _baslerCamera.CameraOpened += Configuration.SoftwareTrigger;
+
+                //Camera 오픈
+                _baslerCamera.Open();
                 bRet = _baslerCamera.IsConnected;
 
                 //False 일경우 return;
                 if (!bRet) return bRet;
 
-                //카메라 모드 설정 "소프트웨어 트리거 모드"
-                _baslerCamera.CameraOpened += Configuration.SoftwareTrigger;
-
-                //카메라 노출 시간 세팅
-                _baslerCamera.Parameters[PLCamera.ExposureTime].SetValue(ExposureTime);
-
-                //Grab 타임 아웃 세팅
-                _grabTimeOut = TimeOut;
-
-                //Camera 오픈
-                _baslerCamera.Open();
-
                 if (_baslerCamera.CanWaitForFrameTriggerReady)
                 {
-                    //카메라 콜백함수 세팅
+                    //카메라 노출 시간 세팅
+                    _baslerCamera.Parameters[PLCamera.ExposureTime].SetValue(ExposureTime);
+
+                    //Grab 타임 아웃 세팅
+                    _grabTimeOut = TimeOut;
+
                     _baslerCamera.StreamGrabber.ImageGrabbed += OnImageGrabbed;
 
                     _baslerCamera.StreamGrabber.Start(GrabStrategy.OneByOne, GrabLoop.ProvidedByStreamGrabber);
@@ -57,6 +55,16 @@ namespace BaslerVision
             }
 
             return bRet;
+        }
+
+        public void CloseCamera()
+        {
+            if (_baslerCamera.CanWaitForFrameTriggerReady)
+            {
+                _baslerCamera.StreamGrabber.Stop();
+            }
+
+            _baslerCamera.Close();
         }
 
         public void OnImageGrabbed(Object sender, ImageGrabbedEventArgs e) 
@@ -81,9 +89,10 @@ namespace BaslerVision
 
         public void ExecuteSoftwareTrigger() 
         {
-            if (_baslerCamera.WaitForFrameTriggerReady(_grabTimeOut, TimeoutHandling.ThrowException))
+            if (_baslerCamera.CanWaitForFrameTriggerReady)
             {
-                _baslerCamera.ExecuteSoftwareTrigger();
+                if (_baslerCamera.WaitForFrameTriggerReady(_grabTimeOut, TimeoutHandling.ThrowException))
+                    _baslerCamera.ExecuteSoftwareTrigger();
             }
         }
 
