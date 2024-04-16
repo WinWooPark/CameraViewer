@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Media;
 using CameraViewer.ManagementSystem;
+using CameraViewer.Utile.Define;
 
 namespace CameraViewer.UI.MainFrame
 {
@@ -18,6 +19,14 @@ namespace CameraViewer.UI.MainFrame
             MotionState = Brushes.Red;
 
             RunMode = "Manual";
+
+            _mainPage = new CameraViewer.UI.MainPage.MainPage();
+            _setUpPage = new CameraViewer.UI.SetUpPage.SetUpPage();
+
+            CurrentPage = _mainPage;
+            _viewName = CommonDefine.SetUpViewName;
+
+            CreateCommand();
         }
 
         private SolidColorBrush _cameraState;
@@ -64,6 +73,66 @@ namespace CameraViewer.UI.MainFrame
             }
         }
 
+        object _mainPage;
+        object _setUpPage;
+
+        object _currentPage;
+        public object CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged(nameof(CurrentPage));   
+            }
+        }
+
+        string _viewName;
+        public string ViewName
+        {
+            get { return _viewName; }
+            set 
+            {
+                if (value != _viewName) 
+                {
+                    _viewName = value;
+                    OnPropertyChanged(nameof(ViewName));
+                }
+            }
+        }
+
+        private RelayCommand _viewChageCommand;
+        public RelayCommand ViewChageCommand 
+        {
+            get { return _viewChageCommand;  }
+            set 
+            {
+                if (_viewChageCommand != value) 
+                {
+                    _viewChageCommand = value;
+                    OnPropertyChanged(nameof(ViewChageCommand));
+                }
+            }
+        }
+
+        bool viewChageFlag = false;
+        void ViewChage() 
+        {
+            if (viewChageFlag)
+            {
+                CurrentPage = _mainPage;
+                ViewName = CommonDefine.SetUpViewName;
+                viewChageFlag = false;
+            }
+            else
+            {
+                CurrentPage = _setUpPage;
+                ViewName = CommonDefine.MainViewName;
+                viewChageFlag = true;
+            }
+        }
+
+
         string _runMode;
         public string RunMode 
         {
@@ -78,6 +147,7 @@ namespace CameraViewer.UI.MainFrame
         public void CreateCommand() 
         {
             //ProgramExit = new RelayCommand();
+            ViewChageCommand = new RelayCommand(ViewChage);
         }
 
         public void HardWareCameraState(bool cameraState) 

@@ -112,8 +112,8 @@
                     <Button
                         Grid.Row="0"
                         Grid.Column="1"
-                        Command="{Binding SetUpUI}"
-                        Content="Set Up"
+                        Command="{Binding ViewChageCommand}"
+                        Content="{Binding ViewName}"
                         Style="{StaticResource FrameButtom}" />
 
 
@@ -178,18 +178,7 @@
 
         <!--  Page  -->
         <Border Grid.Row="2" Style="{StaticResource FrameBorder}">
-            <ContentControl Content="{Binding CurrentViewModel}">
-                <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type MainPage:MainPageViewModel}">
-                        <MainPage:MainPage />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type SetUpPage:SetUpPageViewModel}">
-                        <SetUpPage:SetUpPage />
-                    </DataTemplate>
-                </ContentControl.Resources>
-            </ContentControl>
-
-
+            <ContentControl Content="{Binding CurrentPage}"/>
         </Border>
 
         <!--  Buttom  -->

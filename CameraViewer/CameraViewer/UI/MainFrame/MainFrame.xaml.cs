@@ -9,10 +9,6 @@ namespace CameraViewer.UI.MainFrame
     public partial class MainFrame : UserControl
     {
         MainFrameViewModel _mainFrameViewModel;
-        SetUpPageViewModel _setUpPageViewModel;
-        ImageViewViewModel imageViewViewModel;
-
-        public CurrentViewModel = 
 
         public MainFrame()
         {

@@ -13,9 +13,9 @@ namespace CameraViewer.UI.SetUpPage
 
         public SetUpPage()
         {
-            //_setUpPageViewModel = new SetUpPageViewModel();
+            _setUpPageViewModel = new SetUpPageViewModel();
             InitializeComponent();
-            //DataContext = _setUpPageViewModel;
+            DataContext = _setUpPageViewModel;
         }
     }
 }
