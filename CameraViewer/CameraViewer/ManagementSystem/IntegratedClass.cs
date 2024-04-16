@@ -48,6 +48,11 @@ namespace CameraViewer.ManagementSystem
         }
 
         bool _liveMode = false;
+        public bool liveMode 
+        {
+            get { return _liveMode; }
+            set { _liveMode = value; }
+        }
         BaslerCamera _baslerCamera;
 
         ConfigData _configData;

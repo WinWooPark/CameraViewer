@@ -61,11 +61,13 @@ namespace CameraViewer.ManagementSystem
 
         public void MainViewImageLive()
         {
-            //_integratedClass.ExecuteSoftwareTrigger();
+            _integratedClass.liveMode = true;
+            _integratedClass.ExecuteSoftwareTrigger();
         }
 
         public void MainViewImageStop()
         {
+            _integratedClass.liveMode = false;
         }
     }
 
