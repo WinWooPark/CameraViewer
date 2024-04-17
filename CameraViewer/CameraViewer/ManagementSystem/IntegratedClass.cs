@@ -119,7 +119,7 @@ namespace CameraViewer.ManagementSystem
         {
             if (buffer == null || buffer.Length <= 0 || Height < 0 || Width < 0) return;
 
-            _imageWatchAPI.UpdateUIByteImage(buffer, Width, Height, 1);
+            _imageWatchAPI.UpdateUIImage(buffer, Width, Height, 1);
 
             if (_liveMode) ExecuteSoftwareTrigger();
         }
