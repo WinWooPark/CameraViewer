@@ -59,10 +59,10 @@ namespace BaslerVision
 
         public void CloseCamera()
         {
+            if (_baslerCamera == null) return;
+
             if (_baslerCamera.CanWaitForFrameTriggerReady)
-            {
                 _baslerCamera.StreamGrabber.Stop();
-            }
 
             _baslerCamera.Close();
         }
@@ -89,6 +89,8 @@ namespace BaslerVision
 
         public void ExecuteSoftwareTrigger() 
         {
+            if (_baslerCamera == null) return;
+
             if (_baslerCamera.CanWaitForFrameTriggerReady)
             {
                 if (_baslerCamera.WaitForFrameTriggerReady(_grabTimeOut, TimeoutHandling.ThrowException))
@@ -98,6 +100,8 @@ namespace BaslerVision
 
         public void StopGrab()
         {
+            if (_baslerCamera == null) return;
+
             if (_baslerCamera.CanWaitForFrameTriggerReady)
             {
                 _baslerCamera.StreamGrabber.Stop();

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CameraViewer", "CameraViewe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaslerVision", "Library\BaslerVision\BaslerVision\BaslerVision.csproj", "{19D56B14-D6DA-4FD0-8030-BD16F6A5EA9A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageWatch", "..\..\7. ImageWatch\ImageWatch\ImageWatch\ImageWatch\ImageWatch.csproj", "{89338C36-3826-4B0A-95F7-2DFABCF13E7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{19D56B14-D6DA-4FD0-8030-BD16F6A5EA9A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19D56B14-D6DA-4FD0-8030-BD16F6A5EA9A}.Release|x64.ActiveCfg = Release|x64
 		{19D56B14-D6DA-4FD0-8030-BD16F6A5EA9A}.Release|x64.Build.0 = Release|x64
+		{89338C36-3826-4B0A-95F7-2DFABCF13E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89338C36-3826-4B0A-95F7-2DFABCF13E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89338C36-3826-4B0A-95F7-2DFABCF13E7C}.Debug|x64.ActiveCfg = Debug|x64
+		{89338C36-3826-4B0A-95F7-2DFABCF13E7C}.Debug|x64.Build.0 = Debug|x64
+		{89338C36-3826-4B0A-95F7-2DFABCF13E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89338C36-3826-4B0A-95F7-2DFABCF13E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89338C36-3826-4B0A-95F7-2DFABCF13E7C}.Release|x64.ActiveCfg = Release|x64
+		{89338C36-3826-4B0A-95F7-2DFABCF13E7C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

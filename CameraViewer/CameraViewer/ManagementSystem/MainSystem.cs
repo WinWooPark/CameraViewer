@@ -3,6 +3,7 @@ using OpenCvSharp;
 using CameraViewer.Utile.Define;
 using System.Windows.Media.Imaging;
 using CameraViewer.ManagementSystem;
+using System.Windows.Media;
 
 namespace CameraViewer.ManagementSystem
 {
@@ -43,15 +44,25 @@ namespace CameraViewer.ManagementSystem
                     Image.Height != CommonDefine.ImageSizeHeiget)
                     return;
 
-                BitmapSource Bitmap = OpenCvSharp.WpfExtensions.BitmapSourceConverter.ToBitmapSource(Image);
+                BitmapSource Bitmap = ImageConverter.MatToBitmap(Image);
                 _integratedClass.ImageWatchAPI.UpdateUIImage(Bitmap);
+
+                SolidColorBrush colorBrush = new SolidColorBrush(Colors.Red);
+                _integratedClass.ImageWatchAPI.AddDrawObjectEllipse(100, 100, 500, 500, colorBrush);
+
+                SolidColorBrush colorLineBrush = new SolidColorBrush(Colors.Green);
+                _integratedClass.ImageWatchAPI.AddDrawObjectLine(50, 50, 3780, 3780, colorLineBrush);
+
+                SolidColorBrush colorRectBrush = new SolidColorBrush(Colors.Blue);
+                _integratedClass.ImageWatchAPI.AddDrawObjectRect(100, 100, 500, 500, colorRectBrush);
+
+                _integratedClass.ImageWatchAPI.DrawAllObject();
             }
         }
 
         public void MainViewImageSave()
         {
-
-
+            
         }
 
         public void MainViewImageGrab() 
@@ -74,7 +85,7 @@ namespace CameraViewer.ManagementSystem
         {
             if (_integratedClass.liveMode == true) _integratedClass.liveMode = false;
 
-            _integratedClass.ExitIntegratedClass();
+            _integratedClass.CloseIntegratedClass();
         }
 
     }

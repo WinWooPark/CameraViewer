@@ -10,7 +10,7 @@ namespace CameraViewer.Config
     {
         public SystemData()
         {
-            _exposureTime = 1000;
+            _exposureTime = 15000;
             _timeOut = 1000;
         }
 

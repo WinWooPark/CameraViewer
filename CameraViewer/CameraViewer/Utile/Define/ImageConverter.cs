@@ -12,7 +12,7 @@ namespace CameraViewer.Utile.Define
 {
     class ImageConverter
     {
-        static Mat ByteArrayToMat(byte[] imageData, int width, int height, int channels) 
+        public static Mat ByteArrayToMat(byte[] imageData, int width, int height, int channels) 
         {
             Mat mat = new Mat(height, width, MatType.CV_8UC(channels));
 
@@ -22,7 +22,7 @@ namespace CameraViewer.Utile.Define
             return mat;
         }
 
-        static BitmapSource MatToBitmap(Mat Image)
+        public static BitmapSource MatToBitmap(Mat Image)
         {
             BitmapSource Bitmap = OpenCvSharp.WpfExtensions.BitmapSourceConverter.ToBitmapSource(Image);
 

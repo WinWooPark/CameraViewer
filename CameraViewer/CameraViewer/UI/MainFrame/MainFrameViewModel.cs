@@ -146,7 +146,7 @@ namespace CameraViewer.UI.MainFrame
 
         public void CreateCommand() 
         {
-            //ProgramExit = new RelayCommand();
+            ProgramExit = new RelayCommand(Close);
             ViewChageCommand = new RelayCommand(ViewChage);
         }
 
@@ -170,7 +170,7 @@ namespace CameraViewer.UI.MainFrame
 
         public void Close() 
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("프로그램을 종료하시겠습니까?", "Confirmation", MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.No) return;
 
