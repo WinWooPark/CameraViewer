@@ -4,22 +4,29 @@ using System.Windows.Media;
 using CameraViewer.ManagementSystem;
 using CameraViewer.Utile.Define;
 using System.Windows;
+using CameraViewer.Config;
 
 namespace CameraViewer.UI.MainFrame
 {
     public class MainFrameViewModel : ObservableObject
     {
         MainSystem _mainSystem;
+        HardWareState _hardWareState;
+
         public MainFrameViewModel(MainSystem mainSystem)
         {
             _mainSystem = mainSystem;
             _mainSystem.MainFrame = this;
 
+            _hardWareState = IntegratedClass.Instance.HardWareState;
+
             CameraState = Brushes.Red;
             LightState = Brushes.Red;
             MotionState = Brushes.Red;
 
-            RunMode = "Manual";
+            if (_hardWareState.IsCameraOpen) CameraState = Brushes.Green;
+            if (_hardWareState.IsLightOpen) LightState = Brushes.Green;
+            if (_hardWareState.IsMotionOpen) MotionState = Brushes.Green;
 
             _mainPage = new CameraViewer.UI.MainPage.MainPage();
             _setUpPage = new CameraViewer.UI.SetUpPage.SetUpPage();

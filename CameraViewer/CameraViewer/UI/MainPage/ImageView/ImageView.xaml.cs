@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using ImageWatch;
 
 namespace CameraViewer.UI.MainPage.ImageView
 {
@@ -15,7 +14,6 @@ namespace CameraViewer.UI.MainPage.ImageView
             _imageViewViewModel = new ImageViewViewModel(App.MainSystem);
             InitializeComponent();
             DataContext = _imageViewViewModel;
-         
         }
     }
 }

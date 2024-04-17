@@ -79,7 +79,7 @@ namespace BaslerVision
 
                 byte[] buffer = grabResult.PixelData as byte[];
 
-                _grabCallBack(buffer, ImageHeight, ImageWidth);
+                _grabCallBack(buffer, ImageWidth, ImageHeight);
             }
             else
             {

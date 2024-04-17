@@ -2,7 +2,6 @@
 using BaslerVision;
 using CameraViewer.Utile.Define;
 using ImageWatch;
-using OpenCvSharp;
 using System.Windows.Media.Imaging;
 
 namespace CameraViewer.ManagementSystem
@@ -41,6 +40,12 @@ namespace CameraViewer.ManagementSystem
             set { _mainSystem = value; }
         }
 
+        HardWareState _hardWareState;
+        public HardWareState HardWareState 
+        {
+            get { return _hardWareState; }
+        }
+
         ImageWatchAPI _imageWatchAPI;
         public ImageWatchAPI ImageWatchAPI 
         {
@@ -63,6 +68,8 @@ namespace CameraViewer.ManagementSystem
 
         void InitIntegratedClass()
         {
+            _hardWareState = new HardWareState();
+
             CreateConfigData();
 
             CreateImageWatch();
@@ -98,7 +105,9 @@ namespace CameraViewer.ManagementSystem
             int ExposureTime = _configData.SystemData.ExposureTime;
             int TimeOut = _configData.SystemData.TimeOut;
 
-            _baslerCamera.CameraOpen(ExposureTime, TimeOut);
+            bool IsOpen = _baslerCamera.CameraOpen(ExposureTime, TimeOut);
+
+            _hardWareState.IsCameraOpen = IsOpen;
         }
 
         public void ExecuteSoftwareTrigger() 
@@ -106,14 +115,11 @@ namespace CameraViewer.ManagementSystem
             _baslerCamera.ExecuteSoftwareTrigger();
         }
 
-        public void OnImageGrabbed(byte[] buffer, int Height, int Width) 
+        public void OnImageGrabbed(byte[] buffer, int Width, int Height) 
         {
             if (buffer == null || buffer.Length <= 0 || Height < 0 || Width < 0) return;
 
-
-            BitmapSource bitmapSource = ImageConverter.ByteArrayToBitmapSource(buffer, Width, Height, 1);
-            
-            _imageWatchAPI.UpdateUIImage(bitmapSource);
+            _imageWatchAPI.UpdateUIByteImage(buffer, Width, Height, 1);
 
             if (_liveMode) ExecuteSoftwareTrigger();
         }
