@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using CameraViewer.ManagementSystem;
+using CameraViewer.Utile.Define;
+using ImageWatch;
+using System.Windows.Controls;
 
 
 
@@ -15,6 +18,9 @@ namespace CameraViewer.UI.RecipePage
             _recipePageViewModel = new RecipePageViewModel(App.MainSystem);
             InitializeComponent();
             DataContext = _recipePageViewModel;
+
+            ImageWatchAPI API = IntegratedClass.Instance.ImageWatch[(int)CommonDefine.Views.eRecipeViews];
+            RecipeView.Children.Add(API.ImageWatch);
         }
     }
 }

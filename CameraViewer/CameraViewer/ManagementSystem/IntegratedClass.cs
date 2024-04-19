@@ -4,6 +4,7 @@ using CameraViewer.Utile.Define;
 using ImageWatch;
 using System.Windows.Media.Imaging;
 using ImageWatch.ManagementSystem;
+using OpenCvSharp;
 
 namespace CameraViewer.ManagementSystem
 {
@@ -47,10 +48,11 @@ namespace CameraViewer.ManagementSystem
             get { return _hardWareState; }
         }
 
-        ImageWatchAPI _imageWatchAPI;
-        public ImageWatchAPI ImageWatchAPI 
+        
+        ImageWatchAPI[] _imageWatch;
+        public ImageWatchAPI[] ImageWatch 
         {
-            get { return _imageWatchAPI; }
+            get { return _imageWatch; }
         }
 
         bool _liveMode = false;
@@ -59,6 +61,7 @@ namespace CameraViewer.ManagementSystem
             get { return _liveMode; }
             set { _liveMode = value; }
         }
+
         BaslerCamera _baslerCamera;
 
         ConfigData _configData;
@@ -67,10 +70,18 @@ namespace CameraViewer.ManagementSystem
             get { return _configData; }
         }
 
+        RecipeData _recipeData;
+        public RecipeData RecipeData 
+        {
+            get { return _recipeData; }
+            set { _recipeData = value; }
+        }
+
         void InitIntegratedClass()
         {
             _hardWareState = new HardWareState();
             _mainSystem = App.MainSystem;
+            _recipeData = new RecipeData();
 
             CreateConfigData();
 
@@ -83,7 +94,10 @@ namespace CameraViewer.ManagementSystem
         {
             _baslerCamera.CloseCamera();
 
-            ImageWatchAPI.Close();
+            foreach (var imageWatch in _imageWatch) 
+            {
+                imageWatch.Close();
+            }
         }
 
         void CreateConfigData() 
@@ -96,9 +110,18 @@ namespace CameraViewer.ManagementSystem
 
         void CreateImageWatch() 
         {
-            _imageWatchAPI = new ImageWatchAPI();
-            _imageWatchAPI.InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget,true, true, true);
-            _imageWatchAPI.SetRightMouseButtomEvent(_mainSystem.RightMouseButtomClickEvent);
+            _imageWatch = new ImageWatchAPI[(int)CommonDefine.Views.ViewsCount];
+
+            for (int i = 0; i < _imageWatch.Length; ++i)
+                _imageWatch[i] = new ImageWatchAPI();
+
+            _imageWatch[(int)CommonDefine.Views.eMainViews].InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget);
+
+            _imageWatch[(int)CommonDefine.Views.eRecipeViews].InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget,true, true, true);
+            _imageWatch[(int)CommonDefine.Views.eRecipeViews].MouseRightButtomEvent(_mainSystem.RightMouseButtomClickEvent);
+
+            _imageWatch[(int)CommonDefine.Views.eResipeSubViews].InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget, true, true, true);
+            
         }
 
         void CreateBaslerCamera() 
@@ -122,7 +145,7 @@ namespace CameraViewer.ManagementSystem
         {
             if (buffer == null || buffer.Length <= 0 || Height < 0 || Width < 0) return;
 
-            _imageWatchAPI.UpdateUIImage(buffer, Width, Height, 1);
+            ImageWatch[(int)CommonDefine.Views.eMainViews].UpdateUIImage(buffer, Width, Height, 1);
 
             if (_liveMode) ExecuteSoftwareTrigger();
         }

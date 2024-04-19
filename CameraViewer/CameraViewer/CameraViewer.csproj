@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UI\RecipePage\RecipeTeaching\" />
     <Folder Include="Utile\Icon\" />
   </ItemGroup>
 

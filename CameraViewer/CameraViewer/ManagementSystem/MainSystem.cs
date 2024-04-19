@@ -4,13 +4,18 @@ using CameraViewer.Utile.Define;
 using System.Windows.Media.Imaging;
 using CameraViewer.ManagementSystem;
 using System.Windows.Media;
+using System.Windows;
+using System.Net;
+using CameraViewer.Config;
 
 namespace CameraViewer.ManagementSystem
 {
     public class MainSystem : ViewModels
     {
         IntegratedClass _integratedClass;
-        
+        Mat Image;
+        Mat SubImage;
+
         public MainSystem()
         {
             
@@ -22,12 +27,27 @@ namespace CameraViewer.ManagementSystem
             _integratedClass.MainSystem = this;
         }
 
-        public void MainViewImageFit()
+        public void ViewerFit(CommonDefine.Views views) 
         {
-            _integratedClass.ImageWatchAPI.ImageWatchFit();
+            int Index = 0;
+            switch (views) 
+            {
+                case CommonDefine.Views.eMainViews:
+                    Index = (int)CommonDefine.Views.eMainViews;
+                    break;
+
+                case CommonDefine.Views.eRecipeViews:
+                    Index = (int)CommonDefine.Views.eRecipeViews;
+                    break;
+
+                case CommonDefine.Views.eResipeSubViews:
+                    Index = (int)CommonDefine.Views.eResipeSubViews;
+                    break;
+            }
+            _integratedClass.ImageWatch[Index].ImageWatchFit();
         }
 
-        public void MainViewImageLoad()
+        public void ViewerImageLoad(CommonDefine.Views views)
         {
 
             //시스템 내부에서는 Mat으로 가지고 다니다가 Image를 띄울때만 바꿔서 띄운다.
@@ -37,30 +57,39 @@ namespace CameraViewer.ManagementSystem
 
             if (dlg.ShowDialog() == true)
             {
-                Mat Image = Cv2.ImRead(dlg.FileName);
+                /*Mat */Image = Cv2.ImRead(dlg.FileName);
 
-                //if (Image.Empty() == true ||
-                //    Image.Width != CommonDefine.ImageSizeWidth ||
-                //    Image.Height != CommonDefine.ImageSizeHeiget)
-                //    return;
+                if (Image.Empty() == true ||
+                    Image.Width != CommonDefine.ImageSizeWidth ||
+                    Image.Height != CommonDefine.ImageSizeHeiget) 
+                {
+                    MessageBox.Show("Image size is different");
+                    return;
+                }
+                    
+                int Index = 0;
+
+                switch (views)
+                {
+                    case CommonDefine.Views.eMainViews:
+                        Index = (int)CommonDefine.Views.eMainViews;
+                        break;
+
+                    case CommonDefine.Views.eRecipeViews:
+                        Index = (int)CommonDefine.Views.eRecipeViews;
+                        break;
+
+                    case CommonDefine.Views.eResipeSubViews:
+                        Index = (int)CommonDefine.Views.eResipeSubViews;
+                        break;
+                }
 
                 BitmapSource Bitmap = ImageConverter.MatToBitmap(Image);
-                _integratedClass.ImageWatchAPI.UpdateUIImage(Bitmap);
-
-                //SolidColorBrush colorBrush = new SolidColorBrush(Colors.Red);
-                //_integratedClass.ImageWatchAPI.AddDrawObjectEllipse(100, 100, 500, 500, colorBrush);
-
-                //SolidColorBrush colorLineBrush = new SolidColorBrush(Colors.Green);
-                //_integratedClass.ImageWatchAPI.AddDrawObjectLine(50, 50, 3780, 3780, colorLineBrush);
-
-                //SolidColorBrush colorRectBrush = new SolidColorBrush(Colors.Blue);
-                //_integratedClass.ImageWatchAPI.AddDrawObjectRect(100, 100, 500, 500, colorRectBrush);
-
-                //_integratedClass.ImageWatchAPI.DrawAllObject();
+                _integratedClass.ImageWatch[Index].UpdateUIImage(Bitmap);
             }
         }
 
-        public void MainViewImageSave()
+        public void ViewerImageSave(CommonDefine.Views views)
         {
             
         }
@@ -90,17 +119,28 @@ namespace CameraViewer.ManagementSystem
 
         public void RightMouseButtomClickEvent(System.Windows.Point startPoint, System.Windows.Point EndPoint) 
         {
-            _integratedClass.ImageWatchAPI.DeleteAllDrawObject();
+            _integratedClass.ImageWatch[(int)CommonDefine.Views.eRecipeViews].DeleteAllDrawObject();
 
             double Width = Math.Abs(EndPoint.X - startPoint.X);
             double Height = Math.Abs(EndPoint.Y - startPoint.Y);
 
-            _integratedClass.ImageWatchAPI.AddDrawObjectRect(startPoint.X, startPoint.Y, Width, Height, Colors.Blue);
+            _integratedClass.ImageWatch[(int)CommonDefine.Views.eRecipeViews].AddDrawObjectRect(startPoint.X, startPoint.Y, Width, Height, Colors.AliceBlue);
+            _integratedClass.ImageWatch[(int)CommonDefine.Views.eRecipeViews].DrawAllObject();
 
-            _integratedClass.ImageWatchAPI.DrawAllObject();
+            _integratedClass.RecipeData.RoiRectPoint = startPoint;
+            _integratedClass.RecipeData.RoiRectSize =new System.Windows.Size(Width, Height);
         }
 
-    }
+        public void ShowSubImage() 
+        {
 
-   
+            Point topLeft = new Point(100, 100); // 좌상단 좌표
+            Point bottomRight = new Point(300, 300); // 우하단 좌표
+
+            Mat SubImage = SubImage.SubMat(new Rect(topLeft, bottomRight));
+
+            BitmapSource Bitmap = ImageConverter.MatToBitmap(SubImage);
+            _integratedClass.ImageWatch[(int)CommonDefine.Views.eResipeSubViews].UpdateUIImage(Bitmap);
+        }
+    }
 }
