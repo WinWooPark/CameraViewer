@@ -3,6 +3,7 @@ using BaslerVision;
 using CameraViewer.Utile.Define;
 using ImageWatch;
 using System.Windows.Media.Imaging;
+using ImageWatch.ManagementSystem;
 
 namespace CameraViewer.ManagementSystem
 {
@@ -69,6 +70,7 @@ namespace CameraViewer.ManagementSystem
         void InitIntegratedClass()
         {
             _hardWareState = new HardWareState();
+            _mainSystem = App.MainSystem;
 
             CreateConfigData();
 
@@ -95,7 +97,8 @@ namespace CameraViewer.ManagementSystem
         void CreateImageWatch() 
         {
             _imageWatchAPI = new ImageWatchAPI();
-            _imageWatchAPI.InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget);
+            _imageWatchAPI.InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget,true, true, true);
+            _imageWatchAPI.SetRightMouseButtomEvent(_mainSystem.RightMouseButtomClickEvent);
         }
 
         void CreateBaslerCamera() 

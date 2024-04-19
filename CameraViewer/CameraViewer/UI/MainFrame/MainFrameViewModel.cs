@@ -5,6 +5,7 @@ using CameraViewer.ManagementSystem;
 using CameraViewer.Utile.Define;
 using System.Windows;
 using CameraViewer.Config;
+using CameraViewer.UI.RecipePage;
 
 namespace CameraViewer.UI.MainFrame
 {
@@ -28,11 +29,14 @@ namespace CameraViewer.UI.MainFrame
             if (_hardWareState.IsLightOpen) LightState = Brushes.Green;
             if (_hardWareState.IsMotionOpen) MotionState = Brushes.Green;
 
+
             _mainPage = new CameraViewer.UI.MainPage.MainPage();
             _setUpPage = new CameraViewer.UI.SetUpPage.SetUpPage();
+            _recipePage = new CameraViewer.UI.RecipePage.RecipePage();
 
             CurrentPage = _mainPage;
             _viewName = CommonDefine.SetUpViewName;
+            _recipeUIContent = CommonDefine.RecipeViewName;
 
             CreateCommand();
         }
@@ -81,8 +85,10 @@ namespace CameraViewer.UI.MainFrame
             }
         }
 
+        
         object _mainPage;
         object _setUpPage;
+        object _recipePage;
 
         object _currentPage;
         public object CurrentPage
@@ -109,6 +115,38 @@ namespace CameraViewer.UI.MainFrame
             }
         }
 
+
+
+        string _recipeUIContent;
+        public string RecipeUIContent
+        {
+            get { return _recipeUIContent; }
+            set
+            {
+                if (value != _recipeUIContent)
+                {
+                    _recipeUIContent = value;
+                    OnPropertyChanged(nameof(RecipeUIContent));
+                }
+            }
+        }
+
+        private RelayCommand _recipeUI;
+        public RelayCommand RecipeUI
+        {
+            get { return _recipeUI; }
+            set
+            {
+                if (_recipeUI != value)
+                {
+                    _recipeUI = value;
+                    OnPropertyChanged(nameof(RecipeUI));
+                }
+            }
+        }
+
+        
+
         private RelayCommand _viewChageCommand;
         public RelayCommand ViewChageCommand 
         {
@@ -120,6 +158,22 @@ namespace CameraViewer.UI.MainFrame
                     _viewChageCommand = value;
                     OnPropertyChanged(nameof(ViewChageCommand));
                 }
+            }
+        }
+        bool RecipeChageFlag = false;
+        void RecipeChageChage()
+        {
+            if (RecipeChageFlag)
+            {
+                CurrentPage = _mainPage;
+                RecipeUIContent = CommonDefine.RecipeViewName;
+                RecipeChageFlag = false;
+            }
+            else
+            {
+                CurrentPage = _recipePage;
+                RecipeUIContent = CommonDefine.MainViewName;
+                RecipeChageFlag = true;
             }
         }
 
@@ -155,6 +209,7 @@ namespace CameraViewer.UI.MainFrame
         {
             ProgramExit = new RelayCommand(Close);
             ViewChageCommand = new RelayCommand(ViewChage);
+            RecipeUI = new RelayCommand(RecipeChageChage);
         }
 
         public void HardWareCameraState(bool cameraState) 

@@ -107,7 +107,7 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Command="{Binding RecipeUI}"
-                        Content="Recipe"
+                        Content="{Binding RecipeUIContent}"
                         Style="{StaticResource FrameButtom}" />
                     <Button
                         Grid.Row="0"

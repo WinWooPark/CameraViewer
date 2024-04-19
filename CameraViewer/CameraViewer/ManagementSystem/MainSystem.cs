@@ -39,24 +39,24 @@ namespace CameraViewer.ManagementSystem
             {
                 Mat Image = Cv2.ImRead(dlg.FileName);
 
-                if (Image.Empty() == true ||
-                    Image.Width != CommonDefine.ImageSizeWidth ||
-                    Image.Height != CommonDefine.ImageSizeHeiget)
-                    return;
+                //if (Image.Empty() == true ||
+                //    Image.Width != CommonDefine.ImageSizeWidth ||
+                //    Image.Height != CommonDefine.ImageSizeHeiget)
+                //    return;
 
                 BitmapSource Bitmap = ImageConverter.MatToBitmap(Image);
                 _integratedClass.ImageWatchAPI.UpdateUIImage(Bitmap);
 
-                SolidColorBrush colorBrush = new SolidColorBrush(Colors.Red);
-                _integratedClass.ImageWatchAPI.AddDrawObjectEllipse(100, 100, 500, 500, colorBrush);
+                //SolidColorBrush colorBrush = new SolidColorBrush(Colors.Red);
+                //_integratedClass.ImageWatchAPI.AddDrawObjectEllipse(100, 100, 500, 500, colorBrush);
 
-                SolidColorBrush colorLineBrush = new SolidColorBrush(Colors.Green);
-                _integratedClass.ImageWatchAPI.AddDrawObjectLine(50, 50, 3780, 3780, colorLineBrush);
+                //SolidColorBrush colorLineBrush = new SolidColorBrush(Colors.Green);
+                //_integratedClass.ImageWatchAPI.AddDrawObjectLine(50, 50, 3780, 3780, colorLineBrush);
 
-                SolidColorBrush colorRectBrush = new SolidColorBrush(Colors.Blue);
-                _integratedClass.ImageWatchAPI.AddDrawObjectRect(100, 100, 500, 500, colorRectBrush);
+                //SolidColorBrush colorRectBrush = new SolidColorBrush(Colors.Blue);
+                //_integratedClass.ImageWatchAPI.AddDrawObjectRect(100, 100, 500, 500, colorRectBrush);
 
-                _integratedClass.ImageWatchAPI.DrawAllObject();
+                //_integratedClass.ImageWatchAPI.DrawAllObject();
             }
         }
 
@@ -86,6 +86,18 @@ namespace CameraViewer.ManagementSystem
             if (_integratedClass.liveMode == true) _integratedClass.liveMode = false;
 
             _integratedClass.CloseIntegratedClass();
+        }
+
+        public void RightMouseButtomClickEvent(System.Windows.Point startPoint, System.Windows.Point EndPoint) 
+        {
+            _integratedClass.ImageWatchAPI.DeleteAllDrawObject();
+
+            double Width = Math.Abs(EndPoint.X - startPoint.X);
+            double Height = Math.Abs(EndPoint.Y - startPoint.Y);
+
+            _integratedClass.ImageWatchAPI.AddDrawObjectRect(startPoint.X, startPoint.Y, Width, Height, Colors.Blue);
+
+            _integratedClass.ImageWatchAPI.DrawAllObject();
         }
 
     }

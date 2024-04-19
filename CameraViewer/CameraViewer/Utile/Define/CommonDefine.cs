@@ -13,6 +13,7 @@ namespace CameraViewer.Utile.Define
 
         public const string MainViewName = "Main";
         public const string SetUpViewName = "Set Up";
+        public const string RecipeViewName = "Recipe";
 
         public const int ImageSizeWidth = 3780;
 
