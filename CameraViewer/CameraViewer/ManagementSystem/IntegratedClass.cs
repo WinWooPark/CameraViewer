@@ -2,9 +2,7 @@
 using BaslerVision;
 using CameraViewer.Utile.Define;
 using ImageWatch;
-using System.Windows.Media.Imaging;
-using ImageWatch.ManagementSystem;
-using OpenCvSharp;
+using ImageProcessor;
 
 namespace CameraViewer.ManagementSystem
 {
@@ -77,11 +75,16 @@ namespace CameraViewer.ManagementSystem
             set { _recipeData = value; }
         }
 
+        ImageProcessor.ImageProcessor _imageProcessor;
+
+
         void InitIntegratedClass()
         {
             _hardWareState = new HardWareState();
             _mainSystem = App.MainSystem;
             _recipeData = new RecipeData();
+
+            CreateImageProcessor();
 
             CreateConfigData();
 
@@ -93,11 +96,17 @@ namespace CameraViewer.ManagementSystem
         public void CloseIntegratedClass()
         {
             _baslerCamera.CloseCamera();
+            _imageProcessor.DisposeImageProcessor();
 
             foreach (var imageWatch in _imageWatch) 
             {
                 imageWatch.Close();
             }
+        }
+
+        void CreateImageProcessor() 
+        {
+            _imageProcessor = new ImageProcessor.ImageProcessor(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget, 1, CBInspDone);
         }
 
         void CreateConfigData() 
@@ -116,7 +125,6 @@ namespace CameraViewer.ManagementSystem
                 _imageWatch[i] = new ImageWatchAPI();
 
             _imageWatch[(int)CommonDefine.Views.eMainViews].InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget, true, true, true);
-            //_imageWatch[(int)CommonDefine.Views.eMainViews].MouseRightButtomEvent(_mainSystem.RightMouseButtomClickEvent);
 
             _imageWatch[(int)CommonDefine.Views.eRecipeViews].InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget,true, true, true);
             _imageWatch[(int)CommonDefine.Views.eRecipeViews].MouseRightButtomEvent(_mainSystem.RightMouseButtomClickEvent);
@@ -149,6 +157,11 @@ namespace CameraViewer.ManagementSystem
             ImageWatch[(int)CommonDefine.Views.eMainViews].UpdateUIImage(buffer, Width, Height, 1);
 
             if (_liveMode) ExecuteSoftwareTrigger();
+        }
+
+        public void CBInspDone() 
+        {
+            //검사 완료 시그널.
         }
     }
 }

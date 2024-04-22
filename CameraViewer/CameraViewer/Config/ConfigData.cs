@@ -1,5 +1,6 @@
 ﻿using CameraViewer.Utile.Define;
 using Newtonsoft.Json;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -9,36 +10,21 @@ namespace CameraViewer.Config
 {
     public class ConfigData
     {
-        public ConfigData()
-        {
-            
-        }
+        public ConfigData() { }
 
         SystemData _systemData;
-        public SystemData SystemData 
-        {
-            get { return _systemData; }
-        }
-       FileStream _fileStream;
+        public SystemData SystemData { get { return _systemData; }}
 
         public void LoadConfigData() 
         {
-            CheckConfigDirectory(CommonDefine.ConfigFilePath);
+            string DirectoryPath = string.Format("{ 0}\\{1}", CommonDefine.ConfigFilePath, CommonDefine.SystemConfigFilePath);
+            CheckConfigDirectory(DirectoryPath);
 
-            string Path = string.Format("{0}\\{1}", CommonDefine.ConfigFilePath, CommonDefine.ConfigFileName);
-            bool bFileIsExist =  CheckConfigDataFile(Path);
+            LoadConfigFile(DirectoryPath);
 
-            if (bFileIsExist == true)
-            {
-                string jsonData = File.ReadAllText(Path);
+            LoadRecipeFile(DirectoryPath);
 
-                _systemData = JsonConvert.DeserializeObject<SystemData>(jsonData);
-            }
-            else 
-            {
-                _systemData = new SystemData();
-            }
-
+            return;
         }
 
         void CheckConfigDirectory(string Path) 
@@ -54,16 +40,70 @@ namespace CameraViewer.Config
             else return false;
         }
 
-        public void SaveConfigData()
+        void LoadConfigFile(string DirectoryPath) 
         {
-            CheckConfigDirectory(CommonDefine.ConfigFilePath);
+            string Path = string.Format("{0}\\{1}", DirectoryPath, CommonDefine.SystemConfigFileName);
+            bool bFileIsExist = CheckConfigDataFile(Path);
 
-            string Path = string.Format("{0}//{1}", CommonDefine.ConfigFilePath, CommonDefine.ConfigFileName);
+            if (bFileIsExist == true)
+            {
+                string jsonData = File.ReadAllText(Path);
+
+                _systemData = JsonConvert.DeserializeObject<SystemData>(jsonData);
+            }
+            else
+            {
+                _systemData = new SystemData();
+            }
+        }
+
+        void LoadRecipeFile(string DirectoryPath)
+        {
+            string Path = string.Format("{0}\\{1}", DirectoryPath, CommonDefine.RecipeConfigFileName);
+            bool bFileIsExist = CheckConfigDataFile(Path);
+
+            if (bFileIsExist == true)
+            {
+                string jsonData = File.ReadAllText(Path);
+
+                _systemData = JsonConvert.DeserializeObject<SystemData>(jsonData);
+            }
+            else
+            {
+                _systemData = new SystemData();
+            }
+        }
+
+        void SaveConfigFile(string DirectoryPath)
+        {
+            string Path = string.Format("{0}//{1}", DirectoryPath, CommonDefine.SystemConfigFileName);
             bool bFileIsExist = CheckConfigDataFile(Path);
 
             string jsonData = JsonConvert.SerializeObject(_systemData);
 
             File.WriteAllText(Path, jsonData);
+        }
+
+        void SaveRecipeFile(string DirectoryPath)
+        {
+            string Path = string.Format("{0}//{1}", DirectoryPath, CommonDefine.RecipeConfigFileName);
+            bool bFileIsExist = CheckConfigDataFile(Path);
+
+            string jsonData = JsonConvert.SerializeObject(_systemData);
+
+            File.WriteAllText(Path, jsonData);
+
+         
+        }
+
+        public void SaveConfigData()
+        {
+            string DirectoryPath = string.Format("{ 0}\\{1}", CommonDefine.ConfigFilePath, CommonDefine.SystemConfigFilePath);
+            CheckConfigDirectory(DirectoryPath);
+
+            SaveConfigFile(DirectoryPath);
+
+            SaveRecipeFile(DirectoryPath);
 
             MessageBox.Show("Save Success");
         }

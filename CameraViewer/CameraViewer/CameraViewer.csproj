@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\7. ImageWatch\ImageWatch\ImageWatch\ImageWatch\ImageWatch.csproj" />
     <ProjectReference Include="..\Library\BaslerVision\BaslerVision\BaslerVision.csproj" />
+    <ProjectReference Include="..\Library\ImageProcessor\ImageProcessor.csproj" />
   </ItemGroup>
 
 </Project>
