@@ -1,4 +1,5 @@
-﻿using CameraViewer.Config;
+﻿using CameraViewer.Config.SystemConfig;
+using CameraViewer.Config.RecipeConfig;
 using BaslerVision;
 using CameraViewer.Utile.Define;
 using ImageWatch;
@@ -62,31 +63,30 @@ namespace CameraViewer.ManagementSystem
 
         BaslerCamera _baslerCamera;
 
-        ConfigData _configData;
-        public ConfigData ConfigData 
+        ConfigFileManager _configManager;
+        public ConfigFileManager ConfigManager
         {
-            get { return _configData; }
+            get { return _configManager; }
         }
 
-        RecipeData _recipeData;
-        public RecipeData RecipeData 
+        RecipeFileManager _recipeManager;
+        public RecipeFileManager RecipeManager
         {
-            get { return _recipeData; }
-            set { _recipeData = value; }
+            get { return _recipeManager; }
         }
 
         ImageProcessor.ImageProcessor _imageProcessor;
-
 
         void InitIntegratedClass()
         {
             _hardWareState = new HardWareState();
             _mainSystem = App.MainSystem;
-            _recipeData = new RecipeData();
 
             CreateImageProcessor();
 
-            CreateConfigData();
+            CreateSystemConfigData();
+
+            CreateRecipeDate();
 
             CreateImageWatch();
 
@@ -109,12 +109,20 @@ namespace CameraViewer.ManagementSystem
             _imageProcessor = new ImageProcessor.ImageProcessor(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget, 1, CBInspDone);
         }
 
-        void CreateConfigData() 
+        void CreateSystemConfigData() 
         {
-            _configData = new ConfigData();
+            _configManager = new ConfigFileManager();
 
-            if(_configData != null)
-                _configData.LoadConfigData();
+            if(_configManager != null)
+                _configManager.LoadFile();
+        }
+
+        void CreateRecipeDate() 
+        {
+            _recipeManager = new RecipeFileManager();
+
+            if (_recipeManager != null)
+                _recipeManager.LoadFile();
         }
 
         void CreateImageWatch() 
@@ -137,8 +145,8 @@ namespace CameraViewer.ManagementSystem
         {
             _baslerCamera = new BaslerCamera(OnImageGrabbed);
 
-            int ExposureTime = _configData.SystemData.ExposureTime;
-            int TimeOut = _configData.SystemData.TimeOut;
+            int ExposureTime = _configManager.SystemData.ExposureTime;
+            int TimeOut = _configManager.SystemData.TimeOut;
 
             bool IsOpen = _baslerCamera.CameraOpen(ExposureTime, TimeOut);
 

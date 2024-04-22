@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CameraViewer.ManagementSystem;
-using CameraViewer.Config;
+using CameraViewer.Config.SystemConfig;
 
 namespace CameraViewer.UI.SetUpPage.CameraSetUp
 {
@@ -8,31 +8,31 @@ namespace CameraViewer.UI.SetUpPage.CameraSetUp
     {
         MainSystem _mainSystem;
         IntegratedClass _integrationClass;
-        ConfigData _configData;
+        ConfigFileManager _configManager;
 
         public CameraSetUpViewModel(MainSystem mainSystem)
         {
             _mainSystem = mainSystem;
             _integrationClass = IntegratedClass.Instance;
-            _configData = _integrationClass.ConfigData;
+            _configManager = _integrationClass.ConfigManager;
         }
 
         public int ExposureTime 
         {
-            get { return _configData.SystemData.ExposureTime; }
+            get { return _configManager.SystemData.ExposureTime; }
             set 
             {
-                _configData.SystemData.ExposureTime = value; 
+                _configManager.SystemData.ExposureTime = value; 
                 OnPropertyChanged(nameof(ExposureTime));
             }
         }
 
         public int TimeOut
         {
-            get { return _configData.SystemData.TimeOut; }
+            get { return _configManager.SystemData.TimeOut; }
             set 
             {
-                _configData.SystemData.TimeOut = value;
+                _configManager.SystemData.TimeOut = value;
                 OnPropertyChanged(nameof(TimeOut));
             }
         }

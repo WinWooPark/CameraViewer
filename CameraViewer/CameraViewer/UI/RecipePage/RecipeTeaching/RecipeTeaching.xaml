@@ -179,17 +179,17 @@
                             Grid.Row="2"
                             Grid.Column="1"
                             Style="{StaticResource TextBoxStyle}"
-                            Text="{Binding ShiftX}" />
+                            Text="{Binding LimitShiftX}" />
                         <TextBox
                             Grid.Row="3"
                             Grid.Column="1"
                             Style="{StaticResource TextBoxStyle}"
-                            Text="{Binding ShiftY}" />
+                            Text="{Binding LimitShiftY}" />
                         <TextBox
                             Grid.Row="4"
                             Grid.Column="1"
                             Style="{StaticResource TextBoxStyle}"
-                            Text="{Binding Theta}" />
+                            Text="{Binding LimitTheta}" />
 
                         <TextBlock
                             Grid.Row="0"

@@ -4,7 +4,7 @@ using System.Windows.Media;
 using CameraViewer.ManagementSystem;
 using CameraViewer.Utile.Define;
 using System.Windows;
-using CameraViewer.Config;
+using CameraViewer.Config.SystemConfig;
 using CameraViewer.UI.RecipePage;
 
 namespace CameraViewer.UI.MainFrame

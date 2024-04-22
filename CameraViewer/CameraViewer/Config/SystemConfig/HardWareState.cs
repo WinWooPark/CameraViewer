@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CameraViewer.Config
+namespace CameraViewer.Config.SystemConfig
 {
     public class HardWareState
     {

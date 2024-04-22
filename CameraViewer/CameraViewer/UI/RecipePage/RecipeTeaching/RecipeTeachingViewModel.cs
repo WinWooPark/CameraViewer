@@ -1,4 +1,5 @@
-﻿using CameraViewer.ManagementSystem;
+﻿using CameraViewer.Config.RecipeConfig;
+using CameraViewer.ManagementSystem;
 using CameraViewer.Utile.Define;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -9,11 +10,51 @@ namespace CameraViewer.UI.RecipePage.RecipeTeaching
     public class RecipeTeachingViewModel : ObservableObject
     {
         MainSystem _mainSystem;
+        IntegratedClass _integrationClass;
+        RecipeFileManager _recipeFileManager;
 
         public RecipeTeachingViewModel(MainSystem mainSystem)
         {
             _mainSystem = mainSystem;
+
+            _integrationClass = IntegratedClass.Instance;
+            _recipeFileManager = _integrationClass.RecipeManager;
+
             CreateCommand();
+        }
+
+        public double Resolution
+        {
+            get { return _recipeFileManager.RecipeData.Resolution; }
+            set { _recipeFileManager.RecipeData.Resolution = value; }
+        }
+
+        
+        public double Threshold
+        {
+            get { return _recipeFileManager.RecipeData.Threshold; }
+            set { _recipeFileManager.RecipeData.Threshold = value; }
+        }
+
+        
+        public double LimitShiftX
+        {
+            get { return _recipeFileManager.RecipeData.LimitShiftX; }
+            set { _recipeFileManager.RecipeData.LimitShiftX = value; }
+        }
+
+        
+        public double LimitShiftY
+        {
+            get { return _recipeFileManager.RecipeData.LimitShiftY; }
+            set { _recipeFileManager.RecipeData.LimitShiftY = value; }
+        }
+
+        
+        public double LimitTheta
+        {
+            get { return _recipeFileManager.RecipeData.LimitTheta; }
+            set { _recipeFileManager.RecipeData.LimitTheta = value; }
         }
 
         ICommand _showRef;

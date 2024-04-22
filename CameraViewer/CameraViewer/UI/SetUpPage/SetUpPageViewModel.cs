@@ -17,8 +17,8 @@ namespace CameraViewer.UI.SetUpPage
 
         void CreateCommand() 
         {
-            SaveConfig = new RelayCommand(IntegratedClass.Instance.ConfigData.SaveConfigData);
-            ApplyConfig = new RelayCommand(IntegratedClass.Instance.ConfigData.ApplyConfigData);
+            SaveConfig = new RelayCommand(IntegratedClass.Instance.ConfigManager.SaveFile);
+            ApplyConfig = new RelayCommand(IntegratedClass.Instance.ConfigManager.ApplyConfigData);
         }
     }
 }

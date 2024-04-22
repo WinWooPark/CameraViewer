@@ -4,28 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CameraViewer.Config
+namespace CameraViewer.Config.RecipeConfig
 {
     public class RecipeData
     {
         public RecipeData()
         {
-            _roiRectPoint = new System.Windows.Point(0, 0);
-            RoiRectSize = new System.Windows.Size(0, 0);
-        }
-
-        System.Windows.Point _roiRectPoint;
-        public System.Windows.Point RoiRectPoint 
-        {
-            get { return _roiRectPoint; }
-            set { _roiRectPoint = value; }
-        }
-
-        System.Windows.Size _roiRectSize;
-        public System.Windows.Size RoiRectSize
-        {
-            get { return _roiRectSize; }
-            set { _roiRectSize = value; }
+            _resolution = 0.3;
+            _threshold = 100;
+            _limitShiftX = 3;
+            _limitShiftY = 3;
+            _limitTheta = 3;
         }
 
         double _resolution;

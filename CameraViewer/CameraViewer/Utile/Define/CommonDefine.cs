@@ -10,11 +10,11 @@ namespace CameraViewer.Utile.Define
     {
         public const string ConfigFilePath = "C:\\CameraViewer\\Config";
 
-        public const string SystemConfigFilePath = "\\SystemConfig";
-        public const string RecipeConfigFilePath = "\\RecipeConfig";
+        public const string SystemConfigFilePath = "SystemConfig";
+        public const string RecipeConfigFilePath = "RecipeConfig";
 
-        public const string SystemConfigFileName = "\\SystemFile.cfg";
-        public const string RecipeConfigFileName = "\\RecipeFile.cfg";
+        public const string SystemConfigFileName = "SystemFile.cfg";
+        public const string RecipeConfigFileName = "RecipeFile.cfg";
 
         public const string MainViewName = "Home";
         public const string SetUpViewName = "SetUp";
