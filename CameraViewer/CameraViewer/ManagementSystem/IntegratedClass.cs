@@ -115,7 +115,8 @@ namespace CameraViewer.ManagementSystem
             for (int i = 0; i < _imageWatch.Length; ++i)
                 _imageWatch[i] = new ImageWatchAPI();
 
-            _imageWatch[(int)CommonDefine.Views.eMainViews].InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget);
+            _imageWatch[(int)CommonDefine.Views.eMainViews].InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget, true, true, true);
+            //_imageWatch[(int)CommonDefine.Views.eMainViews].MouseRightButtomEvent(_mainSystem.RightMouseButtomClickEvent);
 
             _imageWatch[(int)CommonDefine.Views.eRecipeViews].InitImageView(CommonDefine.ImageSizeWidth, CommonDefine.ImageSizeHeiget,true, true, true);
             _imageWatch[(int)CommonDefine.Views.eRecipeViews].MouseRightButtomEvent(_mainSystem.RightMouseButtomClickEvent);

@@ -117,7 +117,7 @@ namespace CameraViewer.ManagementSystem
             _integratedClass.CloseIntegratedClass();
         }
 
-        public void RightMouseButtomClickEvent(System.Windows.Point startPoint, System.Windows.Point EndPoint) 
+        public void RightMouseButtomClickEvent(System.Windows.Point startPoint, System.Windows.Point EndPoint)
         {
             _integratedClass.ImageWatch[(int)CommonDefine.Views.eRecipeViews].DeleteAllDrawObject();
 
@@ -128,16 +128,27 @@ namespace CameraViewer.ManagementSystem
             _integratedClass.ImageWatch[(int)CommonDefine.Views.eRecipeViews].DrawAllObject();
 
             _integratedClass.RecipeData.RoiRectPoint = startPoint;
-            _integratedClass.RecipeData.RoiRectSize =new System.Windows.Size(Width, Height);
+            _integratedClass.RecipeData.RoiRectSize = new System.Windows.Size(Width, Height);
+
+            //_integratedClass.ImageWatch[(int)CommonDefine.Views.eMainViews].DeleteAllDrawObject();
+
+            //double Width = Math.Abs(EndPoint.X - startPoint.X);
+            //double Height = Math.Abs(EndPoint.Y - startPoint.Y);
+
+            //_integratedClass.ImageWatch[(int)CommonDefine.Views.eMainViews].AddDrawObjectRect(startPoint.X, startPoint.Y, Width, Height, Colors.AliceBlue);
+            //_integratedClass.ImageWatch[(int)CommonDefine.Views.eMainViews].DrawAllObject();
+
+            //_integratedClass.RecipeData.RoiRectPoint = startPoint;
+            //_integratedClass.RecipeData.RoiRectSize = new System.Windows.Size(Width, Height);
         }
 
         public void ShowSubImage() 
         {
 
-            Point topLeft = new Point(100, 100); // 좌상단 좌표
-            Point bottomRight = new Point(300, 300); // 우하단 좌표
+            OpenCvSharp.Point topLeft = new OpenCvSharp.Point(_integratedClass.RecipeData.RoiRectPoint.X, _integratedClass.RecipeData.RoiRectPoint.Y); // 좌상단 좌표
+            OpenCvSharp.Size bottomRight = new OpenCvSharp.Size(_integratedClass.RecipeData.RoiRectSize.Width, _integratedClass.RecipeData.RoiRectSize.Height); // 우하단 좌표
 
-            Mat SubImage = SubImage.SubMat(new Rect(topLeft, bottomRight));
+            Mat SubImage = Image.SubMat(new OpenCvSharp.Rect(topLeft, bottomRight));
 
             BitmapSource Bitmap = ImageConverter.MatToBitmap(SubImage);
             _integratedClass.ImageWatch[(int)CommonDefine.Views.eResipeSubViews].UpdateUIImage(Bitmap);

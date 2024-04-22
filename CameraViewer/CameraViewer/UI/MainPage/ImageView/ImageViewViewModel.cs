@@ -29,12 +29,13 @@ namespace CameraViewer.UI.MainPage.ImageView
 
         void FitImage() { _mainSystem.ViewerFit(CommonDefine.Views.eMainViews);}
         void LoadImage() { _mainSystem.ViewerImageLoad(CommonDefine.Views.eMainViews); }
+        void SaveImage() { _mainSystem.ViewerImageSave(CommonDefine.Views.eMainViews); }
 
         void CreateCommand() 
         {
             ImageFit = new RelayCommand(FitImage);
             ImageLoad = new RelayCommand(LoadImage);
-            ImageSave = new RelayCommand(_mainSystem.MainViewImageSave);
+            ImageSave = new RelayCommand(SaveImage);
 
             CameraLive = new RelayCommand(_mainSystem.MainViewImageLive);
             CameraStop = new RelayCommand(_mainSystem.MainViewImageStop);

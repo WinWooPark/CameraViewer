@@ -13,6 +13,7 @@ namespace CameraViewer.UI.RecipePage.RecipeTeaching
         public RecipeTeachingViewModel(MainSystem mainSystem)
         {
             _mainSystem = mainSystem;
+            CreateCommand();
         }
 
         ICommand _showRef;
